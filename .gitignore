@@ -1,4 +1,3 @@
-docker-compose.yml
-docker-compose.override.yml
 .secrets
 nginx.conf
+_data_
