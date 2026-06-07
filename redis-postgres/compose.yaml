@@ -1,0 +1,20 @@
+services:
+  frontend:
+    image: frontend:latest
+    ports:
+      - "5001:5001"
+    container_name: frontend_service
+
+  backend:
+    image: backend:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=redis
+    container_name: backend_service
+    depends_on:
+       - redis
+  redis:
+    image: redis:latest
+    container_name: redis_service

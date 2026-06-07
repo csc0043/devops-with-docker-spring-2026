@@ -18,6 +18,13 @@ services:
       - db
     volumes:
       - files:/usr/src/redmine/files
+  adminer:
+    image: adminer:5
+    restart: always
+    environment:
+        - ADMINER_DESIGN=galkaev
+    ports:
+        - 8083:8080
 
 volumes:
   database:
