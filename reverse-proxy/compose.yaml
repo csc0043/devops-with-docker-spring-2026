@@ -1,14 +1,11 @@
 services:
   frontend:
     image: frontend:latest
-    ports:
-      - "5001:5001"
+    restart: unless-stopped
     container_name: frontend_service
 
   backend:
     image: backend:latest
-    ports:
-      - "8080:8080"
     restart: unless-stopped
     environment:
       - REDIS_HOST=redis
@@ -30,9 +27,11 @@ services:
     environment:
       POSTGRES_PASSWORD: example
     container_name: db_redmine
+
   nginx:
     image: nginx:latest
     ports:
       - 8000:80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+    container_name: proxy
