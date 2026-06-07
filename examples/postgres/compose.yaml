@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: example
+    container_name: db_redmine
+    volumes:
+      - database:/var/lib/postgresql
+  redmine:
+    image: redmine:6.1
+    environment:
+      - REDMINE_DB_POSTGRES=db
+      - REDMINE_DB_PASSWORD=example
+    ports:
+      - 9999:3000
+    depends_on:
+      - db
+    volumes:
+      - files:/usr/src/redmine/files
+
+volumes:
+  database:
+  files:
